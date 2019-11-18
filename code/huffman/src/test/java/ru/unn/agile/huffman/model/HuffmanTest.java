@@ -142,7 +142,7 @@ public class HuffmanTest {
     @Test
     public void canCompareWithAnotherObject() {
         Huffman code1 = new Huffman("100");
-        Integer num = new Integer(100);
+        Integer num = Integer.valueOf(100);
         assertFalse(code1.equals(num));
     }
 }
