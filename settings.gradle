@@ -70,6 +70,8 @@ project(":code/length-converter").name = "length-converter-Model"
 include "code/figures-volume-calculator"
 project(":code/figures-volume-calculator").name = "figures-volume-calculator-Model"
 // Киселева Ольга
+include "code/huffman"
+project(":code/huffman").name = "huffman"
 // Конева Александра
 // Коневский Виталий
 include "code/deposit-calculator"
