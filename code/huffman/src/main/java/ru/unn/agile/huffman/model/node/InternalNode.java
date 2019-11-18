@@ -1,27 +1,21 @@
 package ru.unn.agile.huffman.model.node;
 
-public class Node implements Comparable<Node> {
-    private final int sum;
-    private String code;
+import ru.unn.agile.huffman.model.Huffman;
 
-    public Node(final int sum) {
-        this.sum = sum;
-    }
+public class InternalNode extends Node {
+    private final Node left;
+    private final Node right;
 
-    public String getCode() {
-        return this.code;
+    public InternalNode(final Node left, final Node right) {
+        super(left.getSum() + right.getSum());
+        this.left = left;
+        this.right = right;
     }
 
     @Override
-    public int compareTo(final Node o) {
-        return Integer.compare(this.sum, o.sum);
-    }
-
     public void buildCode(final String code) {
-        this.code = code;
-    }
-
-    public int getSum() {
-        return sum;
+        super.buildCode(code);
+        left.buildCode(code + Huffman.CODE_0);
+        right.buildCode(code + Huffman.CODE_1);
     }
 }
