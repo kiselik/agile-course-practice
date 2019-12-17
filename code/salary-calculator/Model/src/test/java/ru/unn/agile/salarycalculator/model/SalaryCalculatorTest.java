@@ -101,10 +101,11 @@ public class SalaryCalculatorTest {
         SalaryCalculator calculator = new SalaryCalculator();
         calculator.setSalary(18000);
         calculator.setWorkedHoursPerMonth(104);
-        calculator.setVacationStartDate(LocalDate.of(2018, Month.OCTOBER, 6));
+        calculator.setVacationStartDate(LocalDate.of(2018, Month.NOVEMBER, 6));
         calculator.setVacationDuration(14);
-
-        assertEquals(9694.28, calculator.calculateSalaryWithNDS(), delta);
+        calculator.setCountingMonth(LocalDate.of(2018, Month.NOVEMBER, 1));
+        
+        assertEquals(9965.45, calculator.calculateSalaryWithNDS(), delta);
     }
 
     @Test
@@ -115,6 +116,7 @@ public class SalaryCalculatorTest {
         calculator.setWorkedHoursPerMonth(144);
         calculator.setVacationStartDate(LocalDate.of(2018, Month.OCTOBER, 27));
         calculator.setVacationDuration(14);
+        calculator.setCountingMonth(LocalDate.of(2018, Month.OCTOBER, 1));
 
         assertEquals(12255.65, calculator.calculateSalaryWithNDS(), delta);
     }
@@ -140,6 +142,7 @@ public class SalaryCalculatorTest {
         calculator.setWorkedHoursPerMonth(0);
         calculator.setVacationStartDate(LocalDate.of(2019, Month.SEPTEMBER, 27));
         calculator.setVacationDuration(50);
+        calculator.setCountingMonth(LocalDate.of(2018, Month.OCTOBER, 1));
 
         assertEquals(0.0, calculator.calculateSalaryWithNDS(), delta);
     }
