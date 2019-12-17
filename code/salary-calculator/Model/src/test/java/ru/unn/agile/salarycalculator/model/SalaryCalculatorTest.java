@@ -104,7 +104,7 @@ public class SalaryCalculatorTest {
         calculator.setVacationStartDate(LocalDate.of(2018, Month.NOVEMBER, 6));
         calculator.setVacationDuration(14);
         calculator.setCountingMonth(LocalDate.of(2018, Month.NOVEMBER, 1));
-                
+
         assertEquals(9965.45, calculator.calculateSalaryWithNDS(), delta);
     }
 
