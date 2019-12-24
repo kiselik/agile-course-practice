@@ -571,8 +571,8 @@ public class ViewModelTests {
 
     @Test
     public void logContainsMessageCorrectValuesInTableAfterUpdate() {
-        viewModel.newValueProperty().set("1");
-        viewModel.newProbabilityProperty().set("0.2");
+        viewModel.newValueProperty().set("2");
+        viewModel.newProbabilityProperty().set("0.3");
         viewModel.updateTableElement();
         List<String> log = viewModel.getLog();
         assertTrue(log.get(0).matches(".*"
@@ -583,8 +583,8 @@ public class ViewModelTests {
 
     @Test
     public void logContainsMessageOperationAfterUpdateTable() {
-        viewModel.newValueProperty().set("1");
-        viewModel.newProbabilityProperty().set("0.2");
+        viewModel.newValueProperty().set("8");
+        viewModel.newProbabilityProperty().set("0.9");
         viewModel.updateTableElement();
         List<String> log = viewModel.getLog();
         assertTrue(log.get(0).matches(".*" + viewModel.getOperationStatus() + ".*"));
@@ -592,20 +592,20 @@ public class ViewModelTests {
 
     @Test
     public void canPutSeveralLogMessages() {
-        viewModel.newValueProperty().set("1");
-        viewModel.newProbabilityProperty().set("0.2");
+        viewModel.newValueProperty().set("3");
+        viewModel.newProbabilityProperty().set("0.6");
         viewModel.updateTableElement();
-        viewModel.newValueProperty().set("2");
-        viewModel.newProbabilityProperty().set("0.3");
+        viewModel.newValueProperty().set("1");
+        viewModel.newProbabilityProperty().set("0.4");
         viewModel.updateTableElement();
 
         assertEquals(2, viewModel.getLog().size());
     }
 
     @Test
-    public void logContainsMessageAfterDeleteLineInTable () {
-        viewModel.newValueProperty().set("1");
-        viewModel.newProbabilityProperty().set("0.2");
+    public void logContainsMessageAfterDeleteLineInTable() {
+        viewModel.newValueProperty().set("3");
+        viewModel.newProbabilityProperty().set("0.");
         viewModel.updateTableElement();
         viewModel.newValueProperty().set("2");
         viewModel.newProbabilityProperty().set("0.3");
