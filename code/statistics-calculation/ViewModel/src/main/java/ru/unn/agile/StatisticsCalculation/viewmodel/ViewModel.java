@@ -9,6 +9,7 @@ import javafx.beans.value.ObservableValue;
 import ru.unn.agile.statisticscalculation.model.DiscreteRandomVariable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 enum InputDataStatus {
@@ -67,6 +68,7 @@ final class LogMessages {
     public static final String OPERATION_WAS_CHANGED = "Operation was changed to ";
     public static final String UPDATE_TABLE = "Updated input. ";
     public static final String DELETE_ELEMENT_IN_TABLE = "Deleted element. ";
+ //   public static final String  = "Deleted element. ";
 
     private LogMessages() { }
 }
@@ -338,7 +340,13 @@ public class ViewModel {
     }
 
     public void updateOperation() {
-        operationStatus.set(calculateOperationStatus().toString());
+
+        //if (!operationStatus.get().equals()) {
+            operationStatus.set(calculateOperationStatus().toString());
+            StringBuilder message = new StringBuilder(LogMessages.OPERATION_WAS_CHANGED);
+            message.append(operation.get().toString()).append(".");
+            logger.addLog(message.toString());
+        //}
     }
 
     public void calculate() {
@@ -347,6 +355,18 @@ public class ViewModel {
                     discreteRandomVariable, operationParameter.get());
             operationStatus.set(OperationStatus.SUCCESS.toString());
             result.set(operationResult.toString());
+
+            StringBuilder message = new StringBuilder(LogMessages.CALCULATE_WAS_PRESSED);
+            message.append("Operation = ").append(operation.get().toString())
+                    .append("; Operation parameter = ").append(operationParameter.get())
+                    .append("; Values = ")
+                    .append(Arrays.toString(discreteRandomVariable.getValues()))
+                    .append("; Probabilities = ")
+                    .append(Arrays.toString(discreteRandomVariable.getProbabilities()))
+                    .append("; Result = ").append(operationResult)
+                    .append(".");
+            logger.addLog(message.toString());
+
         } catch (IllegalArgumentException exception) {
             result.set(exception.toString());
         }

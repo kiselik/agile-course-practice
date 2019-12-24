@@ -562,6 +562,7 @@ public class ViewModelTests {
         viewModel.newValueProperty().set("1");
         viewModel.newProbabilityProperty().set("0.2");
         viewModel.updateTableElement();
+
         List<String> log = viewModel.getLog();
         assertTrue(log.get(0).matches(".*" + "Updated input. "
                 + ".*" + viewModel.getListData().get(0).getValue()
@@ -603,9 +604,9 @@ public class ViewModelTests {
     }
 
     @Test
-    public void logContainsMessageAfterDeleteLineInTable() {
+    public void logContainsMessageAfterDeleteLineInEmptyTable() {
         viewModel.newValueProperty().set("3");
-        viewModel.newProbabilityProperty().set("0.");
+        viewModel.newProbabilityProperty().set("0.1");
         viewModel.updateTableElement();
         viewModel.newValueProperty().set("2");
         viewModel.newProbabilityProperty().set("0.3");
@@ -618,4 +619,76 @@ public class ViewModelTests {
                 + "Value = 2; "
                 + "Probability = 0.3" + ".*"));
     }
+
+    @Test
+    public void logNotContainWhenDeleteLineInEmptyTable() {
+        viewModel.deleteTableElement(0);
+
+        List<String> log = viewModel.getLog();
+        assertEquals(0, log.size());
+    }
+
+    @Test
+    public void logContainsArgumentsAfterCalculate() {
+        viewModel.newValueProperty().set("3");
+        viewModel.newProbabilityProperty().set("0.2");
+        viewModel.updateTableElement();
+        viewModel.newValueProperty().set("5");
+        viewModel.newProbabilityProperty().set("0.8");
+        viewModel.updateTableElement();
+        viewModel.operationProperty().set(Operation.RAW_MOMENT);
+        viewModel.updateOperation();
+        viewModel.operationParameterProperty().set("1");
+
+        viewModel.calculate();
+
+        assertEquals(4, viewModel.getLog().size());
+        assertTrue(viewModel.getLog().get(3).matches(".*" + "Calculate. "
+                + ".*" + viewModel.operationProperty().get().toString()
+                + ".*" + viewModel.operationParameterProperty().get()
+                + "; Values = \\[3.0, 5.0\\]; Probabilities = \\[0.2, 0.8\\]"
+                + ".*" + viewModel.getResult() + ".*"));
+    }
+
+    @Test
+    public void logContainsFullMessageAfterCalculate() {
+        viewModel.newValueProperty().set("3");
+        viewModel.newProbabilityProperty().set("0.4");
+        viewModel.updateTableElement();
+        viewModel.newValueProperty().set("4");
+        viewModel.newProbabilityProperty().set("0.6");
+        viewModel.updateTableElement();
+        viewModel.operationProperty().set(Operation.RAW_MOMENT);
+        viewModel.updateOperation();
+        viewModel.operationParameterProperty().set("1");
+
+        viewModel.calculate();
+
+        assertTrue(viewModel.getLog().get(3).matches(".*"
+                + "Operation = " + viewModel.operationProperty().get().toString()
+                + "; Operation parameter = " + viewModel.operationParameterProperty().get()
+                + "; Values = \\[3.0, 4.0\\]" + "; Probabilities = \\[0.4, 0.6\\]"
+                + "; Result = " + viewModel.getResult() + ".*"));
+    }
+
+    @Test
+    public void logContainsMessageWhenOperationIsChanged() {
+        viewModel.operationProperty().set(Operation.RAW_MOMENT);
+        viewModel.updateOperation();
+
+        List<String> log = viewModel.getLog();
+        assertTrue(log.get(0).matches(".*" + "Operation was changed to " + ".*"));
+    }
+
+    @Test
+    public void logContainsArgumentsMessageWhenOperationIsChanged() {
+        viewModel.operationProperty().set(Operation.RAW_MOMENT);
+        viewModel.updateOperation();
+
+        List<String> log = viewModel.getLog();
+        assertTrue(log.get(0).matches(".*" + "Operation was changed to "
+                + viewModel.operationProperty().get().toString()
+                + ".*"));
+    }
+
 }
