@@ -552,37 +552,37 @@ public class ViewModelTests {
     }
 
     @Test
-    public void containLogMessageZeroMessageInitially() {
+    public void logContainsMessageZeroMessageInitially() {
         List<String> log = viewModel.getLog();
         assertEquals(0, log.size());
     }
 
     @Test
-    public void containFullLogMessageCorrectValuesInTableAfterUpdate() {
+    public void logContainsFullMessageCorrectValuesInTableAfterUpdate() {
         viewModel.newValueProperty().set("1");
         viewModel.newProbabilityProperty().set("0.2");
         viewModel.updateTableElement();
         List<String> log = viewModel.getLog();
         assertTrue(log.get(0).matches(".*" + "Updated input. "
-                + ".*" + viewModel.newValueProperty().get()
-                + "." + viewModel.newProbabilityProperty().get()
-                + "." + viewModel.getOperationStatus() + ".*"));
+                + ".*" + viewModel.getListData().get(0).getValue()
+                + ".*" + viewModel.getListData().get(0).getProbability()
+                + ".*" + viewModel.getOperationStatus() + ".*"));
     }
 
     @Test
-    public void containLogMessageCorrectValuesInTableAfterUpdate() {
+    public void logContainsMessageCorrectValuesInTableAfterUpdate() {
         viewModel.newValueProperty().set("1");
         viewModel.newProbabilityProperty().set("0.2");
         viewModel.updateTableElement();
         List<String> log = viewModel.getLog();
         assertTrue(log.get(0).matches(".*"
-                + ".*" + viewModel.newValueProperty().get()
-                + "." + viewModel.newProbabilityProperty().get()
-                + "."));
+                + " Value = " + viewModel.getListData().get(0).getValue()
+                + "; Probability = " + viewModel.getListData().get(0).getProbability()
+                + ".*"));
     }
 
     @Test
-    public void containLogMessageOperationAfterUpdateTable() {
+    public void logContainsMessageOperationAfterUpdateTable() {
         viewModel.newValueProperty().set("1");
         viewModel.newProbabilityProperty().set("0.2");
         viewModel.updateTableElement();
@@ -600,5 +600,22 @@ public class ViewModelTests {
         viewModel.updateTableElement();
 
         assertEquals(2, viewModel.getLog().size());
+    }
+
+    @Test
+    public void logContainsMessageAfterDeleteLineInTable () {
+        viewModel.newValueProperty().set("1");
+        viewModel.newProbabilityProperty().set("0.2");
+        viewModel.updateTableElement();
+        viewModel.newValueProperty().set("2");
+        viewModel.newProbabilityProperty().set("0.3");
+        viewModel.updateTableElement();
+
+        viewModel.deleteTableElement(1);
+        List<String> log = viewModel.getLog();
+        assertEquals(3, log.size());
+        assertTrue(log.get(2).matches(".*" + "Deleted element. "
+                + "Value = 2; "
+                + "Probability = 0.3" + ".*"));
     }
 }

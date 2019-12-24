@@ -64,8 +64,9 @@ enum OperationStatus {
 
 final class LogMessages {
     public static final String CALCULATE_WAS_PRESSED = "Calculate. ";
-  //  public static final String OPERATION_WAS_CHANGED = "Operation was changed to ";
+    public static final String OPERATION_WAS_CHANGED = "Operation was changed to ";
     public static final String UPDATE_TABLE = "Updated input. ";
+    public static final String DELETE_ELEMENT_IN_TABLE = "Deleted element. ";
 
     private LogMessages() { }
 }
@@ -298,11 +299,13 @@ public class ViewModel {
             } else {
                 listData.add(new TableElement(newValue.getValue(), newProbability.getValue()));
             }
+
             StringBuilder message = new StringBuilder(LogMessages.UPDATE_TABLE);
             message.append("Value = ").append(newValue.get())
                     .append("; Probability = ").append(newProbability.getValue())
                     .append(" Operation: ").append(getOperationStatus()).append(".");
             logger.addLog(message.toString());
+
             setInputFieldsToEmpty();
             inputDataStatus.set(calculateInputDataStatus().toString());
         }
@@ -312,6 +315,11 @@ public class ViewModel {
 
     public void deleteTableElement(final int focusedIndex) {
         if (focusedIndex >= 0 && focusedIndex < listData.size()) {
+            StringBuilder message = new StringBuilder(LogMessages.DELETE_ELEMENT_IN_TABLE);
+            message.append("Value = ").append(listData.get(focusedIndex).getValue())
+                    .append("; Probability = ").append(listData.get(focusedIndex).getProbability())
+                    .append(" Operation: ").append(getOperationStatus()).append(".");
+            logger.addLog(message.toString());
             listData.remove(focusedIndex);
         }
         setInputFieldsToEmpty();
