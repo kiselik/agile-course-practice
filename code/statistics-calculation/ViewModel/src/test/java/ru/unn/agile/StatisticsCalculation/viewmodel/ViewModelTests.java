@@ -536,4 +536,16 @@ public class ViewModelTests {
 
         assertEquals("-2.0", viewModel.getListData().get(0).getValue());
     }
+    @Test
+    public void createViewModelWithLogger() {
+        FakeLogger fakeLogger = new FakeLogger();
+        ViewModel viewModel = new ViewModel(fakeLogger);
+
+        assertNotNull(viewModel);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void throwWhenCreateViewModelWithNullLogger() {
+        ViewModel viewModel = new ViewModel(null);
+    }
 }

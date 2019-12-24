@@ -98,7 +98,14 @@ public class ViewModel {
     private static final String EMPTY = "";
     private DiscreteRandomVariable discreteRandomVariable;
 
+    private ILogger logger;
+
     public ViewModel(final ILogger logger) {
+        if (logger == null) {
+            throw new IllegalArgumentException("Logger is null");
+        }
+
+        this.logger = logger;
         setInputFieldsToEmpty();
         operationParameter.set(EMPTY);
 
