@@ -4,6 +4,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class ViewModelTests {
@@ -547,5 +549,56 @@ public class ViewModelTests {
     @Test(expected = IllegalArgumentException.class)
     public void throwWhenCreateViewModelWithNullLogger() {
         ViewModel viewModel = new ViewModel(null);
+    }
+
+    @Test
+    public void containLogMessageZeroMessageInitially() {
+        List<String> log = viewModel.getLog();
+        assertEquals(0, log.size());
+    }
+
+    @Test
+    public void containFullLogMessageCorrectValuesInTableAfterUpdate() {
+        viewModel.newValueProperty().set("1");
+        viewModel.newProbabilityProperty().set("0.2");
+        viewModel.updateTableElement();
+        List<String> log = viewModel.getLog();
+        assertTrue(log.get(0).matches(".*" + "Updated input. "
+                + ".*" + viewModel.newValueProperty().get()
+                + "." + viewModel.newProbabilityProperty().get()
+                + "." + viewModel.getOperationStatus() + ".*"));
+    }
+
+    @Test
+    public void containLogMessageCorrectValuesInTableAfterUpdate() {
+        viewModel.newValueProperty().set("1");
+        viewModel.newProbabilityProperty().set("0.2");
+        viewModel.updateTableElement();
+        List<String> log = viewModel.getLog();
+        assertTrue(log.get(0).matches(".*"
+                + ".*" + viewModel.newValueProperty().get()
+                + "." + viewModel.newProbabilityProperty().get()
+                + "."));
+    }
+
+    @Test
+    public void containLogMessageOperationAfterUpdateTable() {
+        viewModel.newValueProperty().set("1");
+        viewModel.newProbabilityProperty().set("0.2");
+        viewModel.updateTableElement();
+        List<String> log = viewModel.getLog();
+        assertTrue(log.get(0).matches(".*" + viewModel.getOperationStatus() + ".*"));
+    }
+
+    @Test
+    public void canPutSeveralLogMessages() {
+        viewModel.newValueProperty().set("1");
+        viewModel.newProbabilityProperty().set("0.2");
+        viewModel.updateTableElement();
+        viewModel.newValueProperty().set("2");
+        viewModel.newProbabilityProperty().set("0.3");
+        viewModel.updateTableElement();
+
+        assertEquals(2, viewModel.getLog().size());
     }
 }

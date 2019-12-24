@@ -63,9 +63,9 @@ enum OperationStatus {
 }
 
 final class LogMessages {
-  //  public static final String CALCULATE_WAS_PRESSED = "Calculate. ";
+    public static final String CALCULATE_WAS_PRESSED = "Calculate. ";
   //  public static final String OPERATION_WAS_CHANGED = "Operation was changed to ";
-  //  public static final String EDITING_FINISHED = "Updated input. ";
+    public static final String UPDATE_TABLE = "Updated input. ";
 
     private LogMessages() { }
 }
@@ -298,6 +298,11 @@ public class ViewModel {
             } else {
                 listData.add(new TableElement(newValue.getValue(), newProbability.getValue()));
             }
+            StringBuilder message = new StringBuilder(LogMessages.UPDATE_TABLE);
+            message.append("Value = ").append(newValue.get())
+                    .append("; Probability = ").append(newProbability.getValue())
+                    .append(" Operation: ").append(getOperationStatus()).append(".");
+            logger.addLog(message.toString());
             setInputFieldsToEmpty();
             inputDataStatus.set(calculateInputDataStatus().toString());
         }
@@ -427,6 +432,10 @@ public class ViewModel {
     private void setInputFieldsToEmpty() {
         newValue.set(EMPTY);
         newProbability.set(EMPTY);
+    }
+
+    public List<String> getLog() {
+        return logger.getLog();
     }
 
     private class UpdateDataChangeListener implements ChangeListener<String> {
