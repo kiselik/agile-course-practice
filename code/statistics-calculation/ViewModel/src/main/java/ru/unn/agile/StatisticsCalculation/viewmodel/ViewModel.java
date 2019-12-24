@@ -62,6 +62,14 @@ enum OperationStatus {
     }
 }
 
+final class LogMessages {
+  //  public static final String CALCULATE_WAS_PRESSED = "Calculate. ";
+  //  public static final String OPERATION_WAS_CHANGED = "Operation was changed to ";
+  //  public static final String EDITING_FINISHED = "Updated input. ";
+
+    private LogMessages() { }
+}
+
 public class ViewModel {
     private final StringProperty newValue = new SimpleStringProperty();
     private final StringProperty newProbability = new SimpleStringProperty();
@@ -90,7 +98,7 @@ public class ViewModel {
     private static final String EMPTY = "";
     private DiscreteRandomVariable discreteRandomVariable;
 
-    public ViewModel() {
+    public ViewModel(final ILogger logger) {
         setInputFieldsToEmpty();
         operationParameter.set(EMPTY);
 
