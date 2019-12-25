@@ -187,6 +187,8 @@ include "code/statistics-calculation/ViewModel"
 project(":code/statistics-calculation/ViewModel").name = "statistics-calculation-ViewModel"
 include "code/statistics-calculation/View"
 project(":code/statistics-calculation/View").name = "statistics-calculation-View"
+include "code/statistics-calculation/Infrastructure"
+project(":code/statistics-calculation/Infrastructure").name = "statistics-calculation-Infrastructure"
 // Queue
 include "code/queue/Model"
 project(":code/queue/Model").name = "queue-Model"
