@@ -14,7 +14,6 @@ public class ViewModelTests {
     @Before
     public void setUp() {
         if (viewModel == null) {
-           // FakeLogger fakeLogger = ;
             viewModel = new ViewModel(new FakeLogger());
         }
     }

@@ -46,7 +46,7 @@ public class Calculator {
 
     @FXML
     void initialize() {
-        viewModel.setLogger(new TextLogger("./TxtLogger-lab3.log"));
+        viewModel.setLogger(new TextLogger("./TextLogger-StatisticsCalculation.log"));
         textfieldNewValue.textProperty().bindBidirectional(viewModel.newValueProperty());
         textfieldNewProbability.textProperty().bindBidirectional(
                 viewModel.newProbabilityProperty());

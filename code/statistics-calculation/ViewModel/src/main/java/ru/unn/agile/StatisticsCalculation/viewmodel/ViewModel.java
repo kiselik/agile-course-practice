@@ -91,6 +91,12 @@ public class ViewModel {
 
     private final IntegerProperty selectedListIndex = new SimpleIntegerProperty();
 
+    public StringProperty logsProperty() {
+        return logs;
+    }
+
+    private final StringProperty logs = new SimpleStringProperty();
+
     private final ObjectProperty<ObservableList<Operation>> operations =
             new SimpleObjectProperty<>(FXCollections.observableArrayList(Operation.values()));
     private final ObjectProperty<Operation> operation = new SimpleObjectProperty<>();
@@ -303,7 +309,9 @@ public class ViewModel {
     public ObjectProperty<Operation> operationProperty() {
         return operation;
     }
-
+    public final String getLogs() {
+        return logs.get();
+    }
     public void updateTableElement() {
         inputDataStatus.set(calculateInputDataStatus().toString());
         if (calculateInputDataStatus() == InputDataStatus.READY) {
@@ -319,6 +327,7 @@ public class ViewModel {
                     .append("; Probability = ").append(newProbability.getValue())
                     .append(" Operation: ").append(getOperationStatus()).append(".");
             logger.addLog(message.toString());
+            updateLogstoView();
 
             setInputFieldsToEmpty();
             inputDataStatus.set(calculateInputDataStatus().toString());
@@ -334,6 +343,7 @@ public class ViewModel {
                     .append("; Probability = ").append(listData.get(focusedIndex).getProbability())
                     .append(" Operation: ").append(getOperationStatus()).append(".");
             logger.addLog(message.toString());
+            updateLogstoView();
             listData.remove(focusedIndex);
         }
         setInputFieldsToEmpty();
@@ -356,6 +366,7 @@ public class ViewModel {
                 .append(listData.get(selectedListIndex.get()).getProbability())
                 .append(".");
         logger.addLog(message.toString());
+        updateLogstoView();
     }
 
     public void updateOperation() {
@@ -363,6 +374,7 @@ public class ViewModel {
         StringBuilder message = new StringBuilder(LogMessages.OPERATION_WAS_CHANGED);
         message.append(operation.get().toString()).append(".");
         logger.addLog(message.toString());
+        updateLogstoView();
     }
 
     public void calculate() {
@@ -382,6 +394,7 @@ public class ViewModel {
                     .append("; Result = ").append(operationResult)
                     .append(".");
             logger.addLog(message.toString());
+            updateLogstoView();
 
         } catch (IllegalArgumentException exception) {
             result.set(exception.toString());
@@ -480,6 +493,15 @@ public class ViewModel {
 
     public List<String> getLog() {
         return logger.getLog();
+    }
+
+    private void updateLogstoView() {
+        List<String> fullLog = logger.getLog();
+        String record = new String("");
+        for (String log : fullLog) {
+            record += log + "\n";
+        }
+        logs.set(record);
     }
 
     private class UpdateDataChangeListener implements ChangeListener<String> {
