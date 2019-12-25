@@ -55,7 +55,7 @@ public class ViewModelTests {
     public void isLengthCharactersSalaryNotCorrect() {
         viewModel.setWorkedHours("145");
         viewModel.setCountMonth("5");
-        viewModel.setCountYear("");
+        viewModel.setCountYear("2000");
 
         viewModel.setSalary("1000000000000000000000000");
 
