@@ -109,7 +109,7 @@ public class ViewModel {
 
     private ILogger logger;
 
-    public final void setLogger(final ILogger logger) {
+    public final void setLoggerToViewModel(final ILogger logger) {
         if (logger == null) {
             throw new IllegalArgumentException("Logger parameter can't be null");
         }
@@ -122,7 +122,7 @@ public class ViewModel {
     }
 
     public ViewModel(final ILogger logger) {
-        setLogger(logger);
+        setLoggerToViewModel(logger);
         init();
     }
 
