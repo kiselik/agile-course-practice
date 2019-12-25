@@ -4,6 +4,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class HuffmanViewModelTest {
@@ -11,7 +13,11 @@ public class HuffmanViewModelTest {
 
     @Before
     public void setUp() {
-        viewModel = new HuffmanViewModel();
+        viewModel = new HuffmanViewModel(new LoggerStub());
+    }
+
+    public void setViewModel(final HuffmanViewModel vM) {
+        this.viewModel = vM;
     }
 
     @After
@@ -53,5 +59,11 @@ public class HuffmanViewModelTest {
         viewModel.setInput("");
         viewModel.startEncodeAndDecode();
         assertEquals("", viewModel.getOutputDecode().get());
+    }
+    @Test
+    public void logIsEmptyAtTheBeginningOfWork() {
+        List<String> log = viewModel.getLog();
+
+        assertTrue(log.isEmpty());
     }
 }
