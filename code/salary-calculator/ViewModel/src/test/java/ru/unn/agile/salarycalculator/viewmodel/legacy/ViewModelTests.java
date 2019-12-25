@@ -105,6 +105,9 @@ public class ViewModelTests {
 
     @Test
     public void checkStatusWhenCountInputWithIncorrectYear() {
+        viewModel.setSalary("10000");
+        viewModel.setWorkedHours("145");
+        viewModel.setCountMonth("5");
         viewModel.setCountYear("19191");
 
         viewModel.checkCountFields();
