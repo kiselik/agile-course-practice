@@ -8,8 +8,8 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import ru.unn.agile.statisticscalculation.viewmodel.*?>
 
+<?import ru.unn.agile.statisticscalculation.viewmodel.ViewModel?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.unn.agile.statisticscalculation.view.Calculator">
     <fx:define>
         <ViewModel fx:id="viewModel" />

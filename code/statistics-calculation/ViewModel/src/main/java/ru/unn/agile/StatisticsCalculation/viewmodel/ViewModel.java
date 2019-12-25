@@ -103,12 +103,22 @@ public class ViewModel {
 
     private ILogger logger;
 
-    public ViewModel(final ILogger logger) {
+    public final void setLogger(final ILogger logger) {
         if (logger == null) {
-            throw new IllegalArgumentException("Logger is null");
+            throw new IllegalArgumentException("Logger parameter can't be null");
         }
-
         this.logger = logger;
+    }
+    // FXML needs default c-tor for binding
+    public ViewModel() {
+        init();
+    }
+
+    public ViewModel(final ILogger logger) {
+        setLogger(logger);
+    }
+
+    public void init() {
         setInputFieldsToEmpty();
         operationParameter.set(EMPTY);
 
