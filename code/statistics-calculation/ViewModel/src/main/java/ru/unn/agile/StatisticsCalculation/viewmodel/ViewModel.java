@@ -109,6 +109,7 @@ public class ViewModel {
         }
         this.logger = logger;
     }
+
     // FXML needs default c-tor for binding
     public ViewModel() {
         init();
@@ -116,6 +117,7 @@ public class ViewModel {
 
     public ViewModel(final ILogger logger) {
         setLogger(logger);
+        init();
     }
 
     public void init() {

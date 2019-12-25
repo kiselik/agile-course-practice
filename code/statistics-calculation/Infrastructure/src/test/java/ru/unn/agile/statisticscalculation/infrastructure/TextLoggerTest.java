@@ -12,7 +12,7 @@ import static junit.framework.TestCase.assertNotNull;
 import static org.junit.Assert.*;
 
 public class TextLoggerTest {
-    private static final String FILENAME = "./TextLogger_Tests-lab3.log";
+    private static final String FILENAME = "./TextLogger_Tests-statistics-calculation.log";
     private TextLogger textLogger;
 
     @Before
@@ -25,7 +25,7 @@ public class TextLoggerTest {
     }
 
     @Test
-    public void canCreateLogFileOnDisk() {
+    public void canCreateTextLogFileOnDisk() {
         try {
             new BufferedReader(new FileReader(FILENAME));
         } catch (FileNotFoundException e) {
@@ -64,6 +64,6 @@ public class TextLoggerTest {
         textLogger.addLog(testMessage);
 
         String message = textLogger.getLog().get(0);
-        assertTrue(message.matches("^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2} > .*"));
+        assertTrue(message.matches("^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2} --> .*"));
     }
 }

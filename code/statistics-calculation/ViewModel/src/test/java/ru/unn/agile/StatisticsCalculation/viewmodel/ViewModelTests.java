@@ -11,18 +11,21 @@ import static org.junit.Assert.*;
 public class ViewModelTests {
     private ViewModel viewModel;
 
-    public void setExternalViewModel(final ViewModel viewModel) {
-        this.viewModel = viewModel;
-    }
     @Before
     public void setUp() {
-        FakeLogger fakeLogger = new FakeLogger();
-        viewModel = new ViewModel(fakeLogger);
+        if (viewModel == null) {
+           // FakeLogger fakeLogger = ;
+            viewModel = new ViewModel(new FakeLogger());
+        }
     }
 
     @After
     public void tearDown() {
         viewModel = null;
+    }
+
+    public void setExternalViewModel(final ViewModel viewModel) {
+        this.viewModel = viewModel;
     }
 
     @Test
