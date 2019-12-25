@@ -691,4 +691,38 @@ public class ViewModelTests {
                 + ".*"));
     }
 
+    @Test
+    public void logContainsFullMessageWhenSelectedItemInTable() {
+        viewModel.newValueProperty().set("9");
+        viewModel.newProbabilityProperty().set("0.6");
+        viewModel.updateTableElement();
+
+        viewModel.setSelectedElement(0);
+        viewModel.newValueProperty().set("20");
+        viewModel.newProbabilityProperty().set("0.2");
+        viewModel.updateTableElement();
+
+        List<String> log = viewModel.getLog();
+        assertTrue(log.get(1).matches(".*" + "Selected element in table. " + ".*"));
+    }
+
+    @Test
+    public void logContainsArgumentsMessageWhenSelectedItemInTable() {
+        viewModel.newValueProperty().set("10");
+        viewModel.newProbabilityProperty().set("0.25");
+        viewModel.updateTableElement();
+
+        viewModel.setSelectedElement(0);
+        viewModel.newValueProperty().set("30");
+        viewModel.newProbabilityProperty().set("0.4");
+        viewModel.updateTableElement();
+
+        List<String> log = viewModel.getLog();
+        assertTrue(log.get(1).matches(".*" + "Selected element in table. "
+                + "Index in table: 0"
+                + "; Value = 10"
+                + "; Probability = 0.25"
+                + ".*"));
+    }
+
 }

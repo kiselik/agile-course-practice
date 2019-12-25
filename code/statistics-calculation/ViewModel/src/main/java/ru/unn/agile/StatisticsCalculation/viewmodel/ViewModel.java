@@ -68,7 +68,7 @@ final class LogMessages {
     public static final String OPERATION_WAS_CHANGED = "Operation was changed to ";
     public static final String UPDATE_TABLE = "Updated input. ";
     public static final String DELETE_ELEMENT_IN_TABLE = "Deleted element. ";
- //   public static final String  = "Deleted element. ";
+    public static final String SELECTED_ELEMENT_IN_TABLE = "Selected element in table. ";
 
     private LogMessages() { }
 }
@@ -331,22 +331,26 @@ public class ViewModel {
     }
 
     public void setSelectedElement(final int focusedIndex) {
+        // how?
         selectedListIndex.set(focusedIndex);
         if (selectedListIndex.get() != NOT_SELECTED) {
             newValue.set(listData.get(selectedListIndex.get()).getValue());
             newProbability.set(listData.get(selectedListIndex.get()).getProbability());
             inputDataStatus.set(calculateInputDataStatus().toString());
         }
+        StringBuilder message = new StringBuilder(LogMessages.SELECTED_ELEMENT_IN_TABLE);
+        message.append("Index in table: ").append(selectedListIndex.get())
+                .append("; Value = ").append(listData.get(selectedListIndex.get()).getValue())
+                .append("; Probability = ").append(listData.get(selectedListIndex.get()).getProbability())
+                .append(".");
+        logger.addLog(message.toString());
     }
 
     public void updateOperation() {
-
-        //if (!operationStatus.get().equals()) {
-            operationStatus.set(calculateOperationStatus().toString());
-            StringBuilder message = new StringBuilder(LogMessages.OPERATION_WAS_CHANGED);
-            message.append(operation.get().toString()).append(".");
-            logger.addLog(message.toString());
-        //}
+        operationStatus.set(calculateOperationStatus().toString());
+        StringBuilder message = new StringBuilder(LogMessages.OPERATION_WAS_CHANGED);
+        message.append(operation.get().toString()).append(".");
+        logger.addLog(message.toString());
     }
 
     public void calculate() {
