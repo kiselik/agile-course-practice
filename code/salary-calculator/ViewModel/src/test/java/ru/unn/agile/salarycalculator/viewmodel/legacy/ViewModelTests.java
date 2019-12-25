@@ -13,10 +13,6 @@ public class ViewModelTests {
     @Before
     public void setUpEmptyExample() {
         viewModel = new ViewModel();
-        viewModel.setSalary("10000");
-        viewModel.setWorkedHours("154");
-        viewModel.setCountMonth("10");
-        viewModel.setCountYear("2014");
     }
 
     @After
@@ -30,21 +26,13 @@ public class ViewModelTests {
         assertEquals(Status.COUNT_WAITING, viewModel.getStatus());
     }
 
+
     @Test
-    public void checkSetters() {
+    public void checkStatusWhenReadyCalculate() {
         viewModel.setSalary("10000");
         viewModel.setWorkedHours("145");
         viewModel.setCountMonth("5");
         viewModel.setCountYear("2000");
-
-        assertEquals("10000", viewModel.getSalary());
-        assertEquals("145", viewModel.getWorkedHours());
-        assertEquals("5", viewModel.getCountMonth());
-        assertEquals("2000", viewModel.getCountYear());
-    }
-
-    @Test
-    public void checkStatusWhenReadyCalculate() {
         viewModel.checkCountFields();
 
         assertEquals(Status.READY_CALCULATE, viewModel.getStatus());
@@ -52,6 +40,11 @@ public class ViewModelTests {
 
     @Test
     public void checkStatusCash() {
+        viewModel.setSalary("10000");
+        viewModel.setWorkedHours("145");
+        viewModel.setCountMonth("5");
+        viewModel.setCountYear("2000");
+
         viewModel.checkCountFields();
         viewModel.calculateSalary();
 
@@ -60,7 +53,12 @@ public class ViewModelTests {
 
     @Test
     public void isLengthCharactersSalaryNotCorrect() {
+        viewModel.setWorkedHours("145");
+        viewModel.setCountMonth("5");
+        viewModel.setCountYear("");
+
         viewModel.setSalary("1000000000000000000000000");
+
         viewModel.checkCountFields();
 
         assertEquals(Status.BAD_SALARY_FORMAT_NUMBERS, viewModel.getStatus());
@@ -68,6 +66,10 @@ public class ViewModelTests {
 
     @Test
     public void checkStatusWhenOneOfCountFieldEmpty() {
+        viewModel.setSalary("10000");
+        viewModel.setWorkedHours("145");
+        viewModel.setCountMonth("5");
+
         viewModel.setCountYear("");
 
         viewModel.checkCountFields();
@@ -77,6 +79,10 @@ public class ViewModelTests {
 
     @Test
     public void checkStatusWhenCountInputWithChar() {
+        viewModel.setSalary("10000");
+        viewModel.setCountMonth("5");
+        viewModel.setCountYear("2000");
+
         viewModel.setWorkedHours("a");
 
         viewModel.checkCountFields();
@@ -86,6 +92,10 @@ public class ViewModelTests {
 
     @Test
     public void checkStatusWhenCountInputWithIncorrectMonth() {
+        viewModel.setSalary("10000");
+        viewModel.setWorkedHours("145");
+        viewModel.setCountYear("2000");
+
         viewModel.setCountMonth("50");
 
         viewModel.checkCountFields();
@@ -104,6 +114,11 @@ public class ViewModelTests {
 
     @Test
     public void checkResultWithNormalParameters() {
+        viewModel.setSalary("10000");
+        viewModel.setWorkedHours("145");
+        viewModel.setCountMonth("5");
+        viewModel.setCountYear("2000");
+
         viewModel.checkCountFields();
 
         viewModel.calculateSalary();
@@ -113,7 +128,12 @@ public class ViewModelTests {
 
     @Test
     public void checkResultWithOvertime() {
+        viewModel.setSalary("10000");
+        viewModel.setCountMonth("5");
+        viewModel.setCountYear("2000");
+
         viewModel.setWorkedHours("200");
+
         viewModel.checkCountFields();
 
         viewModel.calculateSalary();
@@ -123,6 +143,10 @@ public class ViewModelTests {
 
     @Test
     public void checkResultWithLessTime() {
+        viewModel.setSalary("10000");
+        viewModel.setCountMonth("5");
+        viewModel.setCountYear("2000");
+
         viewModel.setWorkedHours("10");
         viewModel.checkCountFields();
 
@@ -134,6 +158,11 @@ public class ViewModelTests {
 
     @Test
     public void checkResultWithNegativeWorkedHours() {
+        viewModel.setSalary("10000");
+        viewModel.setCountMonth("5");
+        viewModel.setCountYear("2000");
+
+
         viewModel.setWorkedHours("-144");
 
         viewModel.checkCountFields();
@@ -143,6 +172,10 @@ public class ViewModelTests {
 
     @Test
     public void checkResultWithNegativeSalary() {
+        viewModel.setWorkedHours("145");
+        viewModel.setCountMonth("5");
+        viewModel.setCountYear("2000");
+
         viewModel.setSalary("-10000");
 
         viewModel.checkCountFields();
@@ -152,6 +185,10 @@ public class ViewModelTests {
 
     @Test
     public void checkStatusAndButtonWhenIncorrectDate() {
+        viewModel.setSalary("10000");
+        viewModel.setWorkedHours("145");
+        viewModel.setCountYear("2000");
+
         viewModel.setCountMonth("35");
         viewModel.checkCountFields();
 
