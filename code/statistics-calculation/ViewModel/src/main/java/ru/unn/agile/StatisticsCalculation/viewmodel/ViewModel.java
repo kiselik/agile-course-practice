@@ -331,7 +331,6 @@ public class ViewModel {
     }
 
     public void setSelectedElement(final int focusedIndex) {
-        // how?
         selectedListIndex.set(focusedIndex);
         if (selectedListIndex.get() != NOT_SELECTED) {
             newValue.set(listData.get(selectedListIndex.get()).getValue());
@@ -341,7 +340,8 @@ public class ViewModel {
         StringBuilder message = new StringBuilder(LogMessages.SELECTED_ELEMENT_IN_TABLE);
         message.append("Index in table: ").append(selectedListIndex.get())
                 .append("; Value = ").append(listData.get(selectedListIndex.get()).getValue())
-                .append("; Probability = ").append(listData.get(selectedListIndex.get()).getProbability())
+                .append("; Probability = ")
+                .append(listData.get(selectedListIndex.get()).getProbability())
                 .append(".");
         logger.addLog(message.toString());
     }
