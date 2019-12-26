@@ -134,6 +134,8 @@ include "code/huffman/View"
 project(":code/huffman/View").name = "huffman-View"
 include "code/huffman/ViewModel"
 project(":code/huffman/ViewModel").name = "huffman-ViewModel"
+include "code/huffman/Infrastructure"
+project(":code/huffman/Infrastructure").name = "huffman-Infrastructure"
 // Конева Александра
 include "code/numbers-to-words/Model"
 project(":code/numbers-to-words/Model").name = "numbers-to-words-Model"
