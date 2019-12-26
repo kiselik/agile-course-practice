@@ -79,36 +79,6 @@ public class ViewModelTests {
         viewModel.sumMatrices();
     }
 
-    private void setCorrectInputData() {
-        viewModel.setFirstMatrixProperties(new StringProperty[] {
-                new SimpleStringProperty("1"),
-                new SimpleStringProperty("2"),
-                new SimpleStringProperty("3"),
-                new SimpleStringProperty("4"),
-                new SimpleStringProperty("5"),
-                new SimpleStringProperty("6"),
-                new SimpleStringProperty("7"),
-                new SimpleStringProperty("8"),
-                new SimpleStringProperty("9"),
-        });
-        viewModel.setSecondMatrixProperties(viewModel.getFirstMatrixProperties());
-    }
-
-    private void setWrongInputData() {
-        viewModel.setFirstMatrixProperties(new StringProperty[] {
-                new SimpleStringProperty("3"),
-                new SimpleStringProperty("trash"),
-                new SimpleStringProperty("1"),
-                new SimpleStringProperty("f"),
-                new SimpleStringProperty("fad"),
-                new SimpleStringProperty(";;;"),
-                new SimpleStringProperty("/r/n"),
-                new SimpleStringProperty("1e"),
-                new SimpleStringProperty("9="),
-        });
-        viewModel.setSecondMatrixProperties(viewModel.getFirstMatrixProperties());
-    }
-
     @Test
     public void logIsEmptyAtTheBeginningOfWork() {
         List<String> log = viewModel.getLog();
@@ -118,7 +88,7 @@ public class ViewModelTests {
 
     @Test
     public void canSetLoggerInMatrixViewModel() {
-        viewModel.setLogger(new fakeLogger());
+        viewModel.setLogger(new FakeTextLogger());
         assertNotNull(viewModel.getLogger());
     }
 
@@ -156,5 +126,34 @@ public class ViewModelTests {
         var logMessages = viewModel.getLog();
         var lastLogMessages = logMessages.get(logMessages.size() - 1);
         assertTrue(lastLogMessages.contains(ViewModel.LogMessages.FINISH));
+    }
+    private void setCorrectInputData() {
+        viewModel.setFirstMatrixProperties(new StringProperty[] {
+                new SimpleStringProperty("1"),
+                new SimpleStringProperty("2"),
+                new SimpleStringProperty("3"),
+                new SimpleStringProperty("4"),
+                new SimpleStringProperty("5"),
+                new SimpleStringProperty("6"),
+                new SimpleStringProperty("7"),
+                new SimpleStringProperty("8"),
+                new SimpleStringProperty("9"),
+        });
+        viewModel.setSecondMatrixProperties(viewModel.getFirstMatrixProperties());
+    }
+
+    private void setWrongInputData() {
+        viewModel.setFirstMatrixProperties(new StringProperty[] {
+                new SimpleStringProperty("3"),
+                new SimpleStringProperty("trash"),
+                new SimpleStringProperty("1"),
+                new SimpleStringProperty("f"),
+                new SimpleStringProperty("fad"),
+                new SimpleStringProperty(";;;"),
+                new SimpleStringProperty("/r/n"),
+                new SimpleStringProperty("1e"),
+                new SimpleStringProperty("9="),
+        });
+        viewModel.setSecondMatrixProperties(viewModel.getFirstMatrixProperties());
     }
 }
