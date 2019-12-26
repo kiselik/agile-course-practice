@@ -492,6 +492,9 @@ public class ViewModel {
     }
 
     public List<String> getLog() {
+        if (logger == null) {
+            throw new IllegalArgumentException("Logger is null");
+        }
         return logger.getLog();
     }
 

@@ -729,5 +729,10 @@ public class ViewModelTests {
                 + "; Probability = 0.25"
                 + ".*"));
     }
+    @Test(expected = IllegalArgumentException.class)
+    public void throwWhenGetLogWithoutLogger() {
+        ViewModel vM = new ViewModel();
+        vM.getLog();
+    }
 
 }
