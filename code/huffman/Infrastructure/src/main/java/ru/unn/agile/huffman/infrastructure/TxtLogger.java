@@ -14,7 +14,8 @@ import java.util.Locale;
 
 public class TxtLogger implements ILogger {
 
-    private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss.SSS";
+    private static final String SEPARATOR = " >> ";
     private final BufferedWriter logWriter;
     private final String filename;
 
@@ -42,7 +43,7 @@ public class TxtLogger implements ILogger {
             throw new IllegalArgumentException("Can't log empty message");
         }
         try {
-            logWriter.write(now() + " >> " + message);
+            logWriter.write(now() + SEPARATOR + message);
             logWriter.newLine();
             logWriter.flush();
         } catch (Exception e) {
