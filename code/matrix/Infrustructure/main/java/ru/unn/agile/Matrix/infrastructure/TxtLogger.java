@@ -14,6 +14,7 @@ import java.util.List;
 public class TxtLogger implements ILogger {
 
     private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss.SSS";
+    private static final String SEPARATOR = " >> ";
     private final String fileName;
     private final BufferedWriter logWritter;
 
@@ -36,7 +37,7 @@ public class TxtLogger implements ILogger {
     @Override
     public void log(final String string) {
         try {
-            logWritter.write(currentLocalDataTime() + " >> " + string);
+            logWritter.write(currentLocalDataTime() + SEPARATOR + string);
             logWritter.newLine();
             logWritter.flush();
         } catch (Exception exception) {
