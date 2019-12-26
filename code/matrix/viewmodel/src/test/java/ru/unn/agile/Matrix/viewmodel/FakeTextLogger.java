@@ -11,7 +11,7 @@ public class FakeTextLogger implements ILogger {
     }
 
     @Override
-    public void log(final String s) {
+    public void logMessage(final String s) {
         logsList.add(s);
     }
 

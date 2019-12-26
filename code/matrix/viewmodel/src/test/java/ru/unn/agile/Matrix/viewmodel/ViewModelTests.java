@@ -20,7 +20,7 @@ public class ViewModelTests {
         viewModel = new ViewModel(fakeLogger);
     }
 
-    public void setViewModel(final HuffmanViewModel matrixViewModel) {
+    public void setViewModel(final ViewModel matrixViewModel) {
         this.viewModel = matrixViewModel;
     }
 
