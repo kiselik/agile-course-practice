@@ -169,7 +169,7 @@ public class ViewModel {
         for (i = 0; i < secondMatrixProperties.length; i++) {
             secondMatrixProperties[i].set(String.valueOf(transposedValues[i]));
         }
-        logger.logMessage("transposeSecondMatrix" + LogMessages.FIHISH);
+        logger.logMessage("transposeSecondMatrix" + LogMessages.FINISH);
     }
 
     public void sumMatrices() {
