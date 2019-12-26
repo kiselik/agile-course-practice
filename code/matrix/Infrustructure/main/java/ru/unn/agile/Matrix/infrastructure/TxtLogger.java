@@ -13,24 +13,24 @@ import java.util.List;
 
 public class TxtLogger implements ILogger {
 
-    private static final String DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
     private final String fileName;
     private final BufferedWriter logWritter;
 
-    private static String currentLocalDataTime() {
-        return LocalDateTime.now().format(DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
+    private static String currentLocalTime() {
+        return LocalDateTime.now().format(DateTimeFormatter.ofPattern(DATE_FORMAT));
     }
 
     public TxtLogger(final String fileName) {
-        BufferedWriter logWriter = null;
+        BufferedWriter writter = null;
         this.fileName = fileName;
 
         try {
-            logWriter = new BufferedWriter(new FileWriter(fileName));
+            writter = new BufferedWriter(new FileWriter(fileName));
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
         }
-        logWritter = logWriter;
+        this.logWritter = writter;
     }
 
     @Override

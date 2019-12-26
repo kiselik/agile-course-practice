@@ -9,8 +9,6 @@ import static org.junit.Assert.*;
 public class TxtLoggerTests {
 
     private static final String LOG_NAME = "./TxtLogger_Tests-lab3_matrix.log";
-/*    private static final String DATE_TIME_FORMAT_REGEX =
-            "^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2} >> .*";*/
     private TxtLogger txtLogger;
 
     @Before
