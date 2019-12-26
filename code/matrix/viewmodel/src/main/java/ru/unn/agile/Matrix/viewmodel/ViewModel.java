@@ -69,7 +69,6 @@ public class ViewModel {
         private LogMessages() { }
     }
 
-
     public StringProperty[] getFirstMatrixProperties() {
         return firstMatrixProperties;
     }
