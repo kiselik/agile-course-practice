@@ -3,7 +3,7 @@ package ru.unn.agile.Matrix.infrastructure;
 import ru.unn.agile.polygon.Matrix.ViewModel;
 import ru.unn.agile.polygon.Matrix.ViewModelTests;
 
-public class PolygonAreaCaclViewModelWithTxtLoggerTests extends ViewModelTests {
+public class ViewModelWithTxtLoggerTests extends ViewModelTests {
 
     @Override
     public void setUp() {
