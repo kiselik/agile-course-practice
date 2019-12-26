@@ -13,7 +13,7 @@ import java.util.List;
 
 public class TxtLogger implements ILogger {
 
-    private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss.SSS";
     private final String fileName;
     private final BufferedWriter logWritter;
 
