@@ -22,7 +22,6 @@ public class TxtLoggerTests {
 
     @Test
     public void canCreateLoggerWithFileName() {
-
         assertNotNull(logger);
     }
 

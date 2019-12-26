@@ -15,6 +15,9 @@ public class HuffmanViewModel {
     private ILogger logger;
 
     public HuffmanViewModel(final ILogger logger) {
+        if (logger == null) {
+            throw new IllegalArgumentException("Create view model with logger");
+        }
         setLogger(logger);
         input.set("Reference string");
         outputEncode.set("Encode");
@@ -26,6 +29,10 @@ public class HuffmanViewModel {
             throw new IllegalArgumentException("Logger parameter can't be null");
         }
         this.logger = logger;
+    }
+
+    public ILogger getLogger() {
+        return logger;
     }
 
     private String inputDataLogMessage() {
